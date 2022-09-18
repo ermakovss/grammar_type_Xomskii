@@ -1,0 +1,81 @@
+    #include<iostream>
+    #include <stdio.h>
+    #include <conio.h>
+    #include <string>
+    using namespace std;
+int main()
+{
+    setlocale(LC_ALL,"RUS");
+
+    int i,j,*k=0,Kz=0,Ks=0,S=0,ll=0,pl=0;
+
+    char *lev[5]={"S","S","K","KS","K"};
+    char *prav[5]={"ab","aKSb","bSb","b","e"};
+
+    int length=sizeof(lev)/sizeof(char);
+
+    cout«"Все,введенные пользователем правила P:"«endl;
+
+    for (i=0;i<5;i++)
+    {
+        cout«lev[i]«"->"«prav[i]«endl;
+    }
+
+    for (i=0;i<5;i++)
+    {
+        if (strlen(lev[i])<=strlen(prav[i]))
+        {
+            Kz++;
+        }
+        if (strlen(lev[i])==1 && (int(lev[i])>64 && int(lev[i])<91))
+        {
+            Ks++;
+        }
+    }
+    for (i=0;i<5;i++)
+    {
+        if ((int(prav[i])>64 && int(prav[i])<91) || int(prav[i])==101)
+        {
+            S++;
+        }
+
+        if (S==1)
+        {
+            ll++;
+        }
+
+        *k=(int)prav[i];
+        if ((k[-1]>64 && k[-1]<91) || int(prav[i])==101)
+        {
+            pl++;
+        }
+    }
+
+    if (Kz==length && Ks==length && ll==length && pl==length)
+    {
+        cout«"Грамматика с этими правилами является праволинейной"«endl;
+    }
+
+    if (Kz==length && Ks==length && ll==length && pl<length)
+    {
+        cout«"Грамматика с этими правилами является линейной"«endl;
+    }
+
+    if (Kz==length && Ks==length && ll<length && pl<length)
+    {
+        cout«"Грамматика с этими правилами является контекстно-свободной"«endl;
+    }
+
+    if (Kz==length && Ks<length && ll<length && pl<length)
+    {
+        cout«"Грамматика с этими правилами является контекстно-зависимой"«endl;
+    }
+    
+    if (Kz<length && Ks<length && ll<length && pl<length)
+    {
+        cout«"Грамматика с этими правилами является общей"«endl;
+    }
+
+    system("pause");
+    return 0;
+}
